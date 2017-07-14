@@ -1,2 +1,2 @@
-from .GithubContributions import GithubContributions
-from .GithubContributions import User
+from .user import GithubUser
+from .contributions import GithubContributions
