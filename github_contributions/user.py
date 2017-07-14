@@ -17,20 +17,27 @@ class GithubUser:
         self._username = username
         self._url = url
 
+    def _get_svg_soup(self, url, params=None):
+        req = requests.get(url, params=params)
+        svg = req.content
+        soup = BeautifulSoup(svg, 'html.parser')
+        return soup
+
     def contributions(self, end_date=None):
         params = {'from': end_date} if end_date else None
         try:
-            req = requests.get(self._url.format(self._username), params=params)
-            svg = req.content
-            soup = BeautifulSoup(svg, 'html.parser')
+            soup = self._get_svg_soup(self._url.format(self._username), params)
         except Exception as e:
             raise RuntimeError('Unable to get Github Data: {}'.format(e))
 
         day_elems = soup.find_all('rect', class_='day')
-        days = [Day(date=parse(x['data-date']),
+        days = [Day(date=parse(x['data-date']).date(),
                     count=int(x['data-count']),
                     level=level_for_fill(x['fill']))
                 for x in day_elems]
-        end_date = parse(end_date) or day_elems[-1].date
+        end_date = parse(end_date).date() if end_date else day_elems[-1].date
 
         return GithubContributions(days=days, end_date=end_date)
+
+    def current_streak(self):
+        pass
