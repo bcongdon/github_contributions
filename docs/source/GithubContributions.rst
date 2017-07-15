@@ -4,7 +4,6 @@ github\_contributions\.GithubContributions
 .. autoclass:: github_contributions.contributions.GithubContributions
     :members:
     :undoc-members:
-    :show-inheritance:
 
 .. py:class:: github_contributions.contributions.Day
 

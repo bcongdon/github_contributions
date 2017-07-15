@@ -11,9 +11,17 @@ CONTRIB_URL = BASE_URL + '/users/{0}/contributions'
 
 
 class GithubUser(object):
-    def __init__(self, username, url=CONTRIB_URL):
+    def __init__(self, username, url=None):
+        '''Represents a user on github, and can poll information about that user's
+            contribution history.
+
+
+            :param str username: The user's Github username
+            :param str url: The base Github URL -- useful for use on Github Enterprise. (Optional)
+        '''
+
         self._username = username
-        self._url = url
+        self._url = url or CONTRIB_URL
         self._current_data = None
 
     def _get_contributions(self, from_date):
@@ -38,10 +46,14 @@ class GithubUser(object):
         return contributions
 
     def contributions(self, start_date=None, end_date=None):
-        '''
-        Fetches the contribution history for the given user
+        '''Fetches the contribution history for the given user
 
-        Returns a GithubContributions object
+            By default, fetches 1 year of contribution history
+
+            :param date start_date: Optional start date
+            :param date end_date: Optional end date. Defaults to today.
+            :returns: Returns contributions object
+            :rtype: GithubContributions
         '''
 
         start_date = parse(str(start_date)).date() if start_date else None
@@ -64,6 +76,14 @@ class GithubUser(object):
         return contributions
 
     def longest_streak(self):
+        '''Fetches the longest contribution streak of the user
+
+            Only checks for streaks that have started within the past year.
+
+            :returns: Returns list of days representing longest known streak
+            :rtype: list[Day]
+        '''
+
         streaks = self.contributions().streaks()
 
         # pylint: disable=unnecessary-lambda
@@ -86,6 +106,15 @@ class GithubUser(object):
                                            combined_streak)
 
     def current_streak(self):
+        '''Returns the active streak of the user
+
+            Will return the full list of days associated with the user's streak
+            even if this streak lasts longer than 1 year.
+
+            :returns: Returns list of days representing current streak
+            :rtype: list[Day]
+        '''
+
         contributions = self.contributions()
         known_streaks = contributions.streaks()
         if not known_streaks:
