@@ -1,5 +1,2 @@
 [MESSAGES CONTROL]
-disable=missing-docstring,no-member
-
-[BASIC]
-good-names=i,j,k,ex,Run,_,f,e
+disable=missing-docstring,no-member,invalid-name,protected-access
