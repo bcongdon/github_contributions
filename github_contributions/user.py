@@ -5,7 +5,7 @@ from dateutil.parser import parse
 from .utils import level_for_fill
 from .contributions import GithubContributions
 
-BASE_URL = 'https://github.com/'
+BASE_URL = 'https://github.com'
 CONTRIB_URL = BASE_URL + '/users/{}/contributions'
 
 

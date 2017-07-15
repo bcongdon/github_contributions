@@ -1,0 +1,10 @@
+language: python
+python:
+  - "2.7"
+  - "3.6"
+install: 
+  - python setup.py install
+  - pip install -U pep8 tox
+script:
+  - pep8 github_contributions
+  - tox
