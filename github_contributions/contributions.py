@@ -19,6 +19,9 @@ def _parse_soup(soup):
 
 
 class GithubContributions(object):
+    '''Represents a set of contributions performed by a :py:class:`GithubUser`
+    '''
+
     def __init__(self, soup=None, days=None):
         if days:
             self.days = days
@@ -30,12 +33,24 @@ class GithubContributions(object):
         self.days = [day for day in self.days if day.date >= start_date]
 
     def today(self):
+        """Returns the contribution day object for the current date.
+
+            :returns:  the current day.
+            :rtype: Day
+        """
+
         try:
             return next(e for e in self.days if e.date == date.today())
         except StopIteration:
             raise RuntimeError('No contribution data found for today')
 
     def streaks(self):
+        """Produces a list of streaks within the days known by the contributions object
+
+            :returns: the list of streaks
+            :rtype: list[list[Day]]
+        """
+
         if self._streaks:
             return self._streaks
 

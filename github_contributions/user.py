@@ -65,7 +65,9 @@ class GithubUser(object):
 
     def longest_streak(self):
         streaks = self.contributions().streaks()
-        max_streak = max(streaks, key=lambda s: len(s))  # pylint: disable=unnecessary-lambda
+
+        # pylint: disable=unnecessary-lambda
+        max_streak = max(streaks, key=lambda s: len(s))
         if len(max_streak) < 365:
             return max_streak
         return self.current_streak()

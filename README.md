@@ -42,12 +42,28 @@ print(sum([day.count for day in contribs_2016.days]))
 from github_contributions import GithubUser
 
 user = GithubUser('bcongdon')
-user.current_streak()
-# foo
+streak = user.current_streak()
+print(len(streak))
+# 501
+
+print(streak[0].date)
+# 2016-03-02)
 ```
 
 ### Getting a User's Past Streaks
+``` python
+from github_contributions import GithubUser
 
+user = GithubUser('sindresorhus')
+contributions = user.contributions()
+streaks = contributions.streaks()
+
+print(len(streaks))
+# 30
+
+print(streaks[-1][0].date)
+# 2017-07-15
+```
 
 ## Documentation
 
