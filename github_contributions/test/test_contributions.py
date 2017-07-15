@@ -1,5 +1,6 @@
 from datetime import date
 import unittest
+import pytest
 
 from github_contributions import GithubContributions
 from github_contributions.user import Day
@@ -24,3 +25,9 @@ class TestGithubContributions(unittest.TestCase):
         assert isinstance(today, Day)
         assert today.level == 1
         assert today.count == 5
+
+    def test_today_fail(self):
+        self.contribs.days = self.contribs.days[1:]
+        with pytest.raises(RuntimeError) as err:
+            self.contribs.today()
+        assert 'No contribution data' in str(err)

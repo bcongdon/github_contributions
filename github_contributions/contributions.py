@@ -10,7 +10,7 @@ class GithubContributions(object):
         try:
             return next(e for e in self.days if e.date == date.today())
         except StopIteration:
-            return RuntimeError('No contribution data found for today')
+            raise RuntimeError('No contribution data found for today')
 
     def streaks(self):
         pass
