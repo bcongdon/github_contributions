@@ -4,7 +4,6 @@ python:
   - "3.6"
 install: 
   - python setup.py install
-  - pip install -U pep8 tox
+  - pip install tox-travis
 script:
-  - pep8 github_contributions
   - tox

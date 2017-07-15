@@ -1,7 +1,8 @@
-from github_contributions import GithubContributions
-from github_contributions.user import Day
 from datetime import date
 import unittest
+
+from github_contributions import GithubContributions
+from github_contributions.user import Day
 
 DAYS = [
     Day(date=date.today(), level=1, count=5),
@@ -20,6 +21,6 @@ class TestGithubContributions(unittest.TestCase):
     def test_today(self):
         today = self.contribs.today()
         assert today
-        assert type(today) == Day
+        assert isinstance(today, Day)
         assert today.level == 1
         assert today.count == 5
