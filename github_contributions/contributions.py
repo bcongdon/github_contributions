@@ -23,9 +23,13 @@ class GithubContributions(object):
     '''
 
     def __init__(self, soup=None, days=None):
-        if days:
-            self.days = days
-        else:
+        self.days = days
+        '''The list of days in the contributions object
+
+            :type: [Day]
+        '''
+
+        if soup:
             self.days = _parse_soup(soup)
         self._streaks = None
 
