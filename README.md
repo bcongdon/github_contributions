@@ -1,7 +1,9 @@
 # github_contributions
-:octocat: A Python interface for Github's contribution system
+:octocat: A Python interface for Github's user contribution system
 
 [![Build Status](https://travis-ci.org/bcongdon/github-contributions.svg?branch=master)](https://travis-ci.org/bcongdon/github-contributions)
+[![Documentation Status](https://readthedocs.org/projects/github-contributions/badge/?version=latest)](http://github-contributions.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/GithubContributions.svg)](https://badge.fury.io/py/GithubContributions)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
 
 ```python
@@ -9,6 +11,14 @@
 >>> user = GithubUser('bcongdon')
 >>> print(user.contributions().today())
 Day(date=datetime.date(2017, 7, 15), count=2, level=1)
+```
+
+## Installation
+
+```sh
+$ pip install githubcontributions
+$ python
+>>> import github_contributions
 ```
 
 ## Why github_contributions?
@@ -67,7 +77,7 @@ print(streaks[-1][0].date)
 
 ## Documentation
 
-Read more about the github_contributions API on the [ReadTheDocs]() page.
+Read more about the github_contributions API on the [ReadTheDocs](https://github-contributions.readthedocs.io) page.
 
 ## Projects that use github_contributions
 
