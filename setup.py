@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='GithubContributions',
-      version='0.1.1',
+      version='0.1.2',
       description='A Python interface for Github\'s user contribution system',
       author='Benjamin Congdon',
       author_email='me@bcon.gdn',

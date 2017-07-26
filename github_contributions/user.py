@@ -5,6 +5,7 @@ from dateutil.parser import parse
 import requests
 
 from .contributions import GithubContributions
+from .exceptions import GithubUserNotFoundException
 
 BASE_URL = 'https://github.com'
 CONTRIB_URL = BASE_URL + '/users/{0}/contributions'
@@ -33,10 +34,18 @@ class GithubUser(object):
         try:
             url = self._url.format(self._username)
             req = requests.get(url, params=params)
-            svg = req.content
-            soup = BeautifulSoup(svg, 'html.parser')
         except Exception as ex:
             raise RuntimeError('Unable to get Github Data: {0}'.format(ex))
+
+        if req.status_code == 404:
+            raise GithubUserNotFoundException()
+        elif req.status_code != 200:
+            raise RuntimeError(
+                'Error getting github data: {}'.format(req.content)
+            )
+
+        svg = req.content
+        soup = BeautifulSoup(svg, 'html.parser')
 
         contributions = GithubContributions(soup=soup)
 

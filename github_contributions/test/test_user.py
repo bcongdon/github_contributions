@@ -6,6 +6,7 @@ import mock
 import responses
 
 from github_contributions.contributions import Day
+from github_contributions.exceptions import GithubUserNotFoundException
 from github_contributions import GithubUser
 
 DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
@@ -90,3 +91,26 @@ def test_multi_year_streak():
     assert longest_streak
     assert len(longest_streak) == 499
     assert longest_streak[0].date == date(2016, 3, 2)
+
+
+@responses.activate
+def test_user_not_found():
+    responses.add(responses.GET,
+                  'https://github.com/users/bcongdon/contributions',
+                  match_querystring=True,
+                  status=404)
+
+    with pytest.raises(GithubUserNotFoundException):
+        GithubUser('bcongdon').contributions()
+
+
+@responses.activate
+def test_bad_response():
+    responses.add(responses.GET,
+                  'https://github.com/users/bcongdon/contributions',
+                  match_querystring=True,
+                  status=400)
+
+    with pytest.raises(RuntimeError) as err:
+        GithubUser('bcongdon').contributions()
+    assert 'Error getting github data' in str(err)
