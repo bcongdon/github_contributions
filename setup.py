@@ -13,4 +13,11 @@ setup(name='GithubContributions',
         'requests',
         'bs4',
         'python-dateutil'
-      ])
+      ],
+      extras_require={
+        'dev': [
+          'pytest',
+          'responses==0.5.1',
+          'mock'
+        ]
+      })

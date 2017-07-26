@@ -97,7 +97,6 @@ def test_multi_year_streak():
 def test_user_not_found():
     responses.add(responses.GET,
                   'https://github.com/users/bcongdon/contributions',
-                  match_querystring=True,
                   status=404)
 
     with pytest.raises(GithubUserNotFoundException):
@@ -108,7 +107,6 @@ def test_user_not_found():
 def test_bad_response():
     responses.add(responses.GET,
                   'https://github.com/users/bcongdon/contributions',
-                  match_querystring=True,
                   status=400)
 
     with pytest.raises(RuntimeError) as err:

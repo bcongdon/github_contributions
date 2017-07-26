@@ -30,7 +30,7 @@ class GithubUser(object):
         if from_date == date.today() and self._current_data:
             return self._current_data
 
-        params = {'from': from_date} if from_date != date.today() else {}
+        params = {'from': str(from_date)} if from_date != date.today() else {}
         try:
             url = self._url.format(self._username)
             req = requests.get(url, params=params)
