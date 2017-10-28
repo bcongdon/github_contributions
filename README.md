@@ -1,7 +1,7 @@
 # github_contributions
 :octocat: A Python interface for Github's user contribution system
 
-[![Build Status](https://travis-ci.org/bcongdon/github-contributions.svg?branch=master)](https://travis-ci.org/bcongdon/github-contributions)
+[![Build Status](https://travis-ci.org/bcongdon/github_contributions.svg?branch=master)](https://travis-ci.org/bcongdon/github_contributions)
 [![Documentation Status](https://readthedocs.org/projects/github-contributions/badge/?version=latest)](http://github-contributions.readthedocs.io/en/latest/?badge=latest)
 [![PyPI version](https://badge.fury.io/py/GithubContributions.svg)](https://badge.fury.io/py/GithubContributions)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-green.svg)](https://tldrlegal.com/license/mit-license)
