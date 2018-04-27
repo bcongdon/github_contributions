@@ -83,7 +83,7 @@ Read more about the github_contributions API on the [ReadTheDocs](https://github
 
 `github_contributions` is used in the following projects. If you have a project that does something neat with this library, submit a PR or send me a message to be added to this list. 😀
 
-* [3d-contributions](https://github.com/bcongdon/3d-contributions) - 3D Print Your Github Contributions Chart
+* [git-trophy](https://github.com/bcongdon/git-trophy) - Create a 3D Printed Model of Your Github Contributions
 
 ## Contributing
 
