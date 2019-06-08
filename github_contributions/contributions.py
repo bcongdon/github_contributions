@@ -73,8 +73,8 @@ class GithubContributions(object):
         return streaks
 
     def __str__(self):
-        template = '<GithubContributions {0} days of data ending at {1}>'
-        return template.format(len(self.days), self.end_date)
+        template = '<GithubContributions {0} days of data>'
+        return template.format(len(self.days))
 
     def __repr__(self):
         return self.__str__()
