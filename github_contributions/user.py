@@ -80,7 +80,7 @@ class GithubUser(object):
 
         # Filter by start_date if necessary
         if start_date:
-            contributions._filter_start_date(start_date)
+            contributions._filter_date(start_date, end_date)
 
         return contributions
 

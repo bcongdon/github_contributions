@@ -33,8 +33,8 @@ class GithubContributions(object):
             self.days = _parse_soup(soup)
         self._streaks = None
 
-    def _filter_start_date(self, start_date):
-        self.days = [day for day in self.days if day.date >= start_date]
+    def _filter_date(self, start_date, end_date):
+        self.days = [day for day in self.days if day.date >= start_date and day.date <= end_date]
 
     def today(self):
         """Returns the contribution day object for the current date.
@@ -73,8 +73,8 @@ class GithubContributions(object):
         return streaks
 
     def __str__(self):
-        template = '<GithubContributions {0} days of data ending at {1}>'
-        return template.format(len(self.days), self.end_date)
+        template = '<GithubContributions {0} days of data>'
+        return template.format(len(self.days))
 
     def __repr__(self):
         return self.__str__()
