@@ -42,7 +42,7 @@ def test_streaks():
 
     streaks = contributions.streaks()
     assert streaks
-    assert len(streaks) == 25
-    assert len(streaks[0]) == 18
+    assert len(streaks) == 27
+    assert len(streaks[0]) == 3
     assert len(streaks[-1]) == 1
-    assert streaks[-1][0].date == date(2017, 7, 15)
+    assert streaks[-1][0].date == date(2020, 11, 18)

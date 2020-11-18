@@ -22,7 +22,7 @@ def test_contributions_structure():
     user = GithubUser('bcongdon')
     contributions = user.contributions()
     assert contributions.days
-    assert len(contributions.days) == 370
+    assert len(contributions.days) == 368
     assert isinstance(contributions.days[0], Day)
 
     for day in contributions.days:
@@ -31,9 +31,9 @@ def test_contributions_structure():
         assert isinstance(day.date, date)
         assert isinstance(day.level, int)
 
-    assert contributions.days[0].level == 1
-    assert contributions.days[0].count == 6
-    assert contributions.days[0].date == date(2016, 7, 10)
+    assert contributions.days[0].level == 2
+    assert contributions.days[0].count == 4
+    assert contributions.days[0].date == date(2019, 11, 17)
 
 
 @responses.activate  # Used to disable network connectivity
@@ -68,13 +68,13 @@ def test_longest_streak():
                       body=f.read())
 
     user = GithubUser('sindresorhus')
-    assert len(user.longest_streak()) == 36
-    assert user.longest_streak()[0].date == date(2017, 1, 5)
+    assert len(user.longest_streak()) == 78
+    assert user.longest_streak()[0].date == date(2020, 4, 1)
 
 
 @responses.activate
 def test_multi_year_streak():
-    with open(os.path.join(DATA_PATH, 'bcongdon.html')) as f:
+    with open(os.path.join(DATA_PATH, 'bcongdon_2017.html')) as f:
         responses.add(responses.GET,
                       'https://github.com/users/bcongdon/contributions',
                       match_querystring=True,
@@ -89,8 +89,8 @@ def test_multi_year_streak():
     user = GithubUser('bcongdon')
     longest_streak = user.longest_streak()
     assert longest_streak
-    assert len(longest_streak) == 499
-    assert longest_streak[0].date == date(2016, 3, 2)
+    assert longest_streak[0].date == date(2017, 1, 1)
+    assert len(longest_streak) == 291
 
 
 @responses.activate
