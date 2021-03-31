@@ -9,11 +9,11 @@ Day = namedtuple('Day', ['date', 'count', 'level'])
 
 
 def _parse_soup(soup):
-    day_elems = soup.find_all('rect', class_='day')
+    day_elems = soup.find_all('rect', {"data-date": True}, class_='ContributionCalendar-day')
 
     days = [Day(date=parse(x['data-date']).date(),
                 count=int(x['data-count']),
-                level=level_for_fill(x['fill']))
+                level=int(x['data-level']))
             for x in day_elems]
     return days
 

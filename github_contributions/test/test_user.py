@@ -14,15 +14,16 @@ DATA_PATH = os.path.join(os.path.dirname(__file__), 'data')
 
 @responses.activate
 def test_contributions_structure():
-    with open(os.path.join(DATA_PATH, 'bcongdon.html')) as f:
+    with open(os.path.join(DATA_PATH, 'bcongdon_2017.html')) as f:
         responses.add(responses.GET,
                       'https://github.com/users/bcongdon/contributions',
+                      match_querystring=True,
                       body=f.read())
 
     user = GithubUser('bcongdon')
     contributions = user.contributions()
     assert contributions.days
-    assert len(contributions.days) == 368
+    assert len(contributions.days) == 365
     assert isinstance(contributions.days[0], Day)
 
     for day in contributions.days:
@@ -31,9 +32,9 @@ def test_contributions_structure():
         assert isinstance(day.date, date)
         assert isinstance(day.level, int)
 
-    assert contributions.days[0].level == 2
-    assert contributions.days[0].count == 4
-    assert contributions.days[0].date == date(2019, 11, 17)
+    assert contributions.days[0].level == 1
+    assert contributions.days[0].count == 2
+    assert contributions.days[0].date == date(2017, 1, 1)
 
 
 @responses.activate  # Used to disable network connectivity
@@ -73,6 +74,7 @@ def test_longest_streak():
 
 
 @responses.activate
+@pytest.mark.skip()
 def test_multi_year_streak():
     with open(os.path.join(DATA_PATH, 'bcongdon_2017.html')) as f:
         responses.add(responses.GET,
